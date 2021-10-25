@@ -1,23 +1,33 @@
-import logo from './logo.svg';
 import './App.css';
+import PokeAPI from './Utils/PokeAPI';
+import React, { useEffect, useState } from 'react';
+import PokeItemComponent from './Components/PokeItem';
 
 function App() {
+  
+  const ComponentInit = () => {
+    useEffect(() => {
+      PokeAPI.getPokemonList()
+        .then(data => {
+          let {results} = data;
+
+          setstate(results);
+        })
+        .catch(err => {
+          console.error(err);
+        })
+    }, [])
+  }
+
+  const [state, setstate] = useState([]);
+  ComponentInit();
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <div className="poke_section">
+        {
+          state.map(({name, url}) => ( <PokeItemComponent name={name} url={url}/>))
+        }
+      </div>
     </div>
   );
 }
