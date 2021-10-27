@@ -116,3 +116,19 @@ html, body {
   height: 100%;
   margin: 0 auto;
 }
+
+.pokemon_info_layout {
+  width: 80%;
+  max-width: 600px;
+  min-width: 300px;
+
+
+}
+.pokemon_info_layout th,
+.pokemon_info_layout td {
+  border: 1px solid #dadada;
+}
+.pokemon_info_layout .main_photo {
+  width: 100%;
+  height: 100%;
+}

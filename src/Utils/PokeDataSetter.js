@@ -49,7 +49,9 @@ class PokeDataSetter {
     pokemon.order = order;
 
     let typeNames = await Promise.all(types.map(async ({type}) => {
-      return await PokeAPI.getDataByUrl(type.url);
+      let typesByLanguage = await PokeAPI.getDataByUrl(type.url);
+      let typeForKorean = getKoreanInLanguage(typesByLanguage.names)[0].name;
+      return typeForKorean;
     }))
 
     pokemon.types = typeNames

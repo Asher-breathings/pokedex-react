@@ -34,7 +34,6 @@ class Pokemon {
   #id
   #name
   #image
-  #type
   #order
   #weight
   #flavorText
@@ -62,8 +61,6 @@ class Pokemon {
   set order(_order) { this.#order = _order }
   get order() { return this.#order }
 
-  set type(_type) { this.#type = _type }
-  get type() { return this.#type }
 
   set weight(_weight) { this.#weight = _weight }
   get weight() { return this.#weight}
@@ -73,8 +70,13 @@ class Pokemon {
 
   set genus(_genus) { this.#genus = _genus }
   get genus() { return this.#genus}
-
+  /**
+   * @param {Array}
+   */
   set types(_types) { this.#types = _types};
+  /**
+   * @return {Array}
+   */
   get types() { return this.#types}
 }
 
