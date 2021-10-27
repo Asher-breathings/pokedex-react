@@ -17,7 +17,6 @@ function App() {
   }
   const moreLoadPokemon = async () => {
     await PokemonDataManager.loadPokemon();
-    await PokemonDataManager.isLoaded();
     let pokemonList = PokemonDataManager.pokemonList;
 
     setstate([...pokemonList]);
@@ -28,7 +27,7 @@ function App() {
     <div className="App">
       <div className="poke_section">
         {
-          state.map((pokemon) => ( <PokeItemComponent pokemon={pokemon}/>))
+          state.map((pokemon) => ( <PokeItemComponent key={pokemon.id} pokemon={pokemon}/>))
         }
       </div>
       <button onClick={() => {moreLoadPokemon()}}>추가</button>

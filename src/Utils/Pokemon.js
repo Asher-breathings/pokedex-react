@@ -39,6 +39,7 @@ class Pokemon {
   #weight
   #flavorText
   #genus
+  #types
 
   set id(_id) { this.#id = _id }
   get id() { return this.#id }
@@ -72,6 +73,9 @@ class Pokemon {
 
   set genus(_genus) { this.#genus = _genus }
   get genus() { return this.#genus}
+
+  set types(_types) { this.#types = _types};
+  get types() { return this.#types}
 }
 
 export {Pokemon, PokeImages};
