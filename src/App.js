@@ -5,6 +5,7 @@ import PokemonDataManager from './Utils/PokeDataSetter';
 
 function App() {
   
+  const [state, setstate] = useState([]);
   const ComponentInit = () => {
     useEffect( async () => {
       await PokemonDataManager.isLoaded();
@@ -14,8 +15,14 @@ function App() {
       setstate(pokemonList);
     }, [])
   }
+  const moreLoadPokemon = async () => {
+    await PokemonDataManager.loadPokemon();
+    await PokemonDataManager.isLoaded();
+    let pokemonList = PokemonDataManager.pokemonList;
 
-  const [state, setstate] = useState([]);
+    setstate([...pokemonList]);
+
+  }
   ComponentInit();
   return (
     <div className="App">
@@ -24,6 +31,7 @@ function App() {
           state.map((pokemon) => ( <PokeItemComponent pokemon={pokemon}/>))
         }
       </div>
+      <button onClick={() => {moreLoadPokemon()}}>추가</button>
     </div>
   );
 }

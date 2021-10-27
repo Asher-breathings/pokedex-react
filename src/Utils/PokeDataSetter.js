@@ -14,22 +14,25 @@ class PokeDataSetter {
   #todoCount = 0;
   #completeCount = 0;
 
-  async loadPokemon() {
-    this.#isComplete = false;
+  loadPokemon() {
+    return new Promise(async (resolve, reject) => {
+      this.#isComplete = false;
 
-    let pokemonList = await PokeAPI.getPokemonList();
-    this.#todoCount = pokemonList.length;
-    pokemonList.forEach(
-      async ({name, url}) => {
-        let pokemonInfo = await this.getPokemonInfo(name, url);
+      let pokemonList = await PokeAPI.getPokemonList();
+      this.#todoCount = pokemonList.length;
+      pokemonList.forEach(
+        async ({name, url}) => {
+          let pokemonInfo = await this.getPokemonInfo(name, url);
 
-        this.#pokemonList.push(pokemonInfo);
-        
-        if(++this.#completeCount >= this.#todoCount) {
-          this.#isComplete = true;
+          this.#pokemonList.push(pokemonInfo);
+          
+          if(++this.#completeCount >= this.#todoCount) {
+            this.#isComplete = true;
+            resolve();
+          }
         }
-      }
-    ) 
+      ) 
+    })
   }
 
   async getPokemonInfo (name, url) {
