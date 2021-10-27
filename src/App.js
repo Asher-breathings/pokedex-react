@@ -1,21 +1,17 @@
 import './App.css';
-import PokeAPI from './Utils/PokeAPI';
 import React, { useEffect, useState } from 'react';
 import PokeItemComponent from './Components/PokeItem';
+import PokemonDataManager from './Utils/PokeDataSetter';
 
 function App() {
   
   const ComponentInit = () => {
-    useEffect(() => {
-      PokeAPI.getPokemonList()
-        .then(data => {
-          let {results} = data;
+    useEffect( async () => {
+      await PokemonDataManager.isLoaded();
 
-          setstate(results);
-        })
-        .catch(err => {
-          console.error(err);
-        })
+      let pokemonList = PokemonDataManager.pokemonList;
+
+      setstate(pokemonList);
     }, [])
   }
 
@@ -25,7 +21,7 @@ function App() {
     <div className="App">
       <div className="poke_section">
         {
-          state.map(({name, url}) => ( <PokeItemComponent name={name} url={url}/>))
+          state.map((pokemon) => ( <PokeItemComponent pokemon={pokemon}/>))
         }
       </div>
     </div>
